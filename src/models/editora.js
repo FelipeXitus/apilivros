@@ -36,7 +36,6 @@ class Editora {
   }
 
   async atualizar(id) {
-    // o update retorna a quantidade de rows atualizados e não o objeto do registro atualizado
     await db('editoras')
       .where({ id })
       .update({ ...this, updated_at: new Date().toISOString() });
@@ -45,16 +44,12 @@ class Editora {
   }
 
   static async excluir(id) {
-    // o del retorna a quantidade de rows deletados
     await db('editoras')
       .where({ id })
       .del();
   }
 
   async salvar() {
-    // verificar se o id existe no banco
-    // se não existir é create
-    // se existir é update
     if (this.id) {
       return this.atualizar(this.id);
     }
